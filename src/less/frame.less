@@ -1,0 +1,246 @@
+.center(@width, @height) {	// 居中
+	width: @width;
+	height: @height;
+	top: 50%;
+	left: 50%;
+	margin-top: -@height/2;
+	margin-left: -@width/2; 
+}
+.btn(@color) {
+	background: @color;
+	border-radius: 4px;
+	padding: 5px 10px;
+	color: #fcfcfc;
+	border: solid 1px @color - #111;
+	&:hover {
+		background: @color - #111;
+	}
+}
+
+/* 组件 */
+.util() {
+	.panel {
+		width: 100%;
+		border-radius: 8px;
+		padding-bottom: 15px;
+		background: rgba(255,255,255,0.4);  
+		&-nav {
+			padding: 0 25px;
+			h1 {
+				font-family: yueyuan;
+				line-height: 100px;
+				text-align: center;
+				font-size: 45px;
+				color: #fff;
+			}
+		}
+		&-body {
+			padding: 0 25px;
+		}
+	}
+	.sr-only {
+		display: none;
+	}
+	.disabled {
+		opacity: 0.5;
+		letter-spacing: 0!important;
+		cursor: not-allowed!important;
+	}
+	.pull-left {
+		float: left!important;
+	}
+	.pull-right {
+		float: right!important;
+	}
+	.loading {
+		z-index: 1;
+		.center(130px, 130px);
+		position: fixed;		
+		background: rgba(0, 0, 0, 0.7);
+		border-radius: 8px;
+		i {
+			.center(28px, 28px);
+			position: absolute;
+			display: block;
+			border: 2px solid #fff;
+			border-radius: 50%;
+    		clip: rect(0 auto 12px 0);	// 半圆
+			animation: spin 1s infinite linear;	// 旋转
+		}
+		@keyframes spin {
+			from {
+				transform: rotate(0deg); 
+			}
+			to {
+				transform: rotate(360deg);
+			}
+		}
+	}
+	
+	.btn {
+		&-default {
+			.btn(#fff);
+			color: #333;
+			border-color: #ccc;
+		}
+		&-info {
+			.btn(#27A7E5);
+		}
+		&-primary {
+			.btn(#5BC0DE);
+		}
+		&-danger {
+			.btn(#B77683);
+		}
+		&-success {
+			.btn(#275F7C);
+		}
+	}
+	.form-select {
+    	position: relative;
+    	&:after {
+    		content: "";
+	    	top: 13px;
+			right: 7px;
+	        position: absolute;
+	        border: solid 9px transparent;
+	        border-left-width: 8px;
+	        border-right-width: 6px;
+	        border-top-color: #fff;
+    	}
+    }
+	.modal {
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		animation: modal-bg 0.3s;
+		background: rgba(0, 0, 0, 0.7);
+		&-inner {
+			.center(400px, 200px);
+			position: absolute;
+			padding: 40px 0 10px 0;
+			height: auto;
+			top: 30%;
+			text-align: center;
+			background: #fafafa;
+			border-radius: 8px;
+			p {
+				font-size: 16px;
+				padding: 10px 0;
+			}
+			.btn-group {
+				padding: 10px 0;
+				.clear();
+				a {
+					display: inline-block;
+				}
+			}
+		}
+	}
+	.buffer {
+		animation: modal-down 0.5s;
+	}
+	@keyframes modal-bg {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+	@keyframes modal-down {
+		from {
+			transform: translateY(-20px);
+		}
+		to {
+			transform: translateY(0);
+		}
+	}
+}
+
+/* 默认样式 */
+.public() {
+	@font-face {
+		font-family: yueyuan;
+		src: url('../font/yueyuan.otf');
+	}
+	html, body {
+		width: 100%;
+		height: 100%;
+		background: url('../../images/background.png');
+		font-size: 14px;
+		color: #333;
+		font-family: "Microsoft Yahei";
+	}
+	html, body, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, p {
+		margin: 0;
+		padding: 0;
+	}
+	i, em {
+		font-style: normal;
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+	img {
+		display: block;
+		max-width: 100%;
+	}
+	ul {
+		list-style: none;
+	}
+	input, select, button, textarea {
+		border: 1px;
+		outline: none;
+        box-sizing: border-box;
+		border-radius: 4px;
+		font-family: "Microsoft Yahei";
+        appearance: none;
+	}
+	input, select, textarea {
+		color: #fff;
+		padding: 0 10px;
+		background: #42BEF9;
+	}
+	input[type=submit], button, .btn {
+		cursor: pointer;
+	}
+	::-webkit-input-placeholder {
+        color: #AAE0FA;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #AAE0FA;
+    }
+    .clear() {
+		&:before{
+			content: "";
+			display: table;
+			clear: both;
+		}
+		&:after{
+			content: "";
+			display: table;
+			clear: both;
+		}
+	}
+	.container {
+		opacity: 0;
+		transition: opacity .3s;
+	}
+	.opacity {
+		opacity: 1!important;
+	}
+	footer {
+	    margin-top: 20px;
+	    text-align: center;
+	    font-size: 14px;
+	    color: #D1EDFC;
+	    padding: 20px 0;
+	}
+	[v-cloak] {
+		display: none;
+	}
+}

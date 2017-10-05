@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>信息记录 · Quanta center</title>
+	<link rel="stylesheet" href="../dist/css/overview.min.css">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+</head>
+<body v-on:keyup.27="offModal">
+<div class="container" v-bind:class="{'opacity': !status.isLoading}">
+	<div class="panel">
+		<div class="panel-nav">
+			<a href="./index.html" class="icon-home pull-left"></a>
+			<a href="{{output_url}}" target="_blank" class="btn-primary btn-excel pull-right">导出为 Excel</a>
+			<h1>信息记录</h1>
+			<form action="" method="GET" v-on:submit.prevent>
+				<div class="form-group form-select" v-for="item in formGroup" v-on:click.stop=onFocus(item.key)>
+					<label for="{{item.key}}" v-text="item.name"></label>
+					<select id="{{item.key}}" v-model="option[item.key]" v-on:change="renderData">
+						<option v-for="i in item.value" value="{{i.depart_id || i.id}}" v-text="i.depart_name || i.tag">
+							<!-- 选项 -->
+						</option>
+					</select>
+				</div>
+				<div class="form-group form-search">
+					<input type="text" class="search" v-model="option.keyword" v-on:keyup="delay" placeholder="搜索名字/班级/手机号/邮箱"/>
+				</div>
+				<a href="./detail.html" class="btn btn-add" title="添加新纪录"></a>
+			</form>
+		</div>
+		<div class="panel-body" v-bind:class="{'opacity': !status.isSelecting}">
+			<table>
+				<thead>
+				<tr>
+					<td>No.</td>
+					<td>th</td>
+		            <td>部门</td>
+		            <td>编号</td>
+		            <td>姓名</td>
+		            <td>性别</td>
+		            <td>第二意向</td>
+		            <td>班级</td>
+		            <td>手机</td>
+		            <td>一面结果</td>
+		            <td>二面结果</td>
+		            <td>三面结果</td>
+		            <td>操作</td>
+				</tr>
+				</thead>
+				<tbody>
+				<tr v-for="item in mainData">
+					<td v-text="$index + 1"></td>
+					<td v-text="item.year"></td>
+					<td v-text="item.first_will | toDepartment"></td>
+					<td v-text="item.itv_code"></td>
+					<td v-text="item.name"></td>
+					<td v-text="item.sex | toSex"></td>
+					<td v-text="item.second_will | toDepartment"></td>
+					<td v-text="item.class"></td>
+					<td v-text="item.phone || '无'"></td>
+					<td>
+						<span v-text="item.fir_result | toResult"></span>
+						<span v-text="item.fir_grade"></span>
+					</td>
+					<td>
+						<span v-text="item.sec_result | toResult"></span>
+						<span v-text="item.sec_grade"></span>
+					</td>
+					<td>
+						<span v-text="item.thd_result | toResult"></span>
+						<span v-text="item.thd_grade"></span>
+					</td>
+					<td class="operate">
+						<a class="btn-info" href="./detail.html?itv_code={{item.itv_code}}">详情</a>
+						<a href="javascript:void(0)" class="btn-danger" v-on:click="onModal('prompt', '确定要删除该记录吗？', item)">删除</a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<p v-if="mainData.length<=0" class="row text">--- 暂无记录 ---</p>
+			<a href="./detail.html" class="row btn-info">+</a>
+		</div>
+	</div>
+	<footer>
+		<p>Copyright © 2016-2020 Quanta（量子）信息技术服务中心</p>
+	</footer>
+</div>
+<div class="loading" v-show="status.isLoading"><i></i></div>
+<div class="modal" v-if="modal.status" v-on:click="offModal" v-cloak>
+	<div class="modal-inner buffer" v-on:click.stop>
+		<p v-text="modal.text"></p>
+		<p v-text="modal.data | each"></p>
+		<div class="btn-group" v-if="modal.type=='prompt'">
+			<a href="javascript:void(0)" class="btn-primary" v-on:click="deleteItem(modal.data.itv_code)">确定</a>
+			<a href="javascript:void(0)" class="btn-default" v-on:click="offModal">取消</a>
+		</div>
+		<div class="btn-group" v-if="modal.type=='notice'">
+			<a href="javascript:void(0)" class="btn-info" v-on:click="offModal">确定</a>
+		</div>
+	</div>
+</div>
+<script src="../Lib/vue/vue.min.js"></script>
+<script src="../Lib/vue/vue-resource.min.js"></script>
+<script src="../src/js/overview.js"></script>
+</body>
+</html>

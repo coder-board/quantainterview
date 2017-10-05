@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页 · Quanta center</title>
+	<link rel="stylesheet" href="../dist/css/index.min.css">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+</head>
+<body>
+<div class="container" v-bind:class="{'opacity': !status.isLoading}">
+	<header>
+		<h1 class="icon-logo"><img src="../images/logo.jpg" alt=""></h1>
+		<ul class="nav">
+			<li>
+				<span>面试人数</span>
+				<strong v-text="count">面试人数</strong>
+			</li>
+			<li v-for="item in data">
+				<span v-text="item.key"></span>
+				<strong v-text="item.value"></strong>
+			</li>
+		</ul>
+	</header>
+	<section>
+		<a href="./detail.html">
+			<dl>
+				<dt>
+					<img src="../images/poster-interview.png" alt="">
+				</dt>
+				<dd>新增面试</dd>
+			</dl>
+		</a>
+		<a href="./overview.html">
+			<dl>
+				<dt>
+					<img src="../images/poster-record.png" alt="">
+				</dt>
+				<dd>信息记录</dd>
+			</dl>
+		</a>
+		
+	</section>
+	<footer>
+		<p>Copyright © 2016-2020 Quanta（量子）信息技术服务中心</p>
+	</footer>
+</div>
+<script src="../Lib/vue/vue.min.js"></script>
+<script src="../Lib/vue/vue-resource.min.js"></script>
+<script src="../dist/js/index.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加入 Qt 面试系统 · Qnanta Center</title>
+	<link rel="stylesheet" href="../dist/css/join.min.css">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+</head>
+<body>
+<div class="container" v-bind:class="{'opacity': !status.isLoading}">
+	<header>
+		<h3>社团注册</h3>
+	</header>
+	<section>
+		<div class="thumbnail text-error" v-if="hintData.status">
+			<span v-text="hintData.text"></span>
+			<span class="icon-close" v-on:click="offHint"></span>
+		</div>
+		<form action="" method="" v-on:submit.prevent="onSubmit">
+			<div class="form-group">
+				<label for="org" class="sr-only">社团</label>
+				<input type="text" id="org" v-model="form.name" placeholder="请输入社团名称" required/>
+			</div>
+			<div class="form-group">
+				<label for="pwd" class="sr-only">设置登录密码</label>
+				<input type="password" id="pwd" maxlength="16" v-model="form.pwd" placeholder="设置登录密码" required/>
+			</div>
+			<div class="form-group">
+				<label for="repwd" class="sr-only">重复密码</label>
+				<input type="password" id="repwd" maxlength="16" v-model="form.repwd" placeholder="重复密码" required/>
+			</div>
+			<div class="form-group">
+				<label for="check" class="sr-only">注册码</label>
+				<input type="password" id="check" maxlength="16" v-model="form.check" placeholder="注册码" required/>
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn-success btn-reg" v-if="!status.isSubmit" value="提交">
+				<input type="submit" v-else class="btn-success btn-reg disabled" value="loading..." disabled>
+			</div>
+		</form>
+		<div class="thumbnail text-default">
+			已注册了社团账号，<a href="./login.html">前往登录</a>
+		</div>
+	</section>
+	<footer>
+		<p>Copyright © 2016-2020 Quanta（量子）信息技术服务中心</p>
+	</footer>
+</div>
+<div class="modal" v-cloak v-show="modal.isModal">
+	<div class="modal-inner buffer">
+		<p v-text="modal.text"></p>
+		<div class="btn-group">
+			<a href="./login.html" class="btn-info">确定</a>
+		</div>
+	</div>
+</div>
+<script src="../Lib/vue/vue.min.js"></script>
+<script src="../Lib/vue/vue-resource.min.js"></script>
+<script src="../dist/js/join.min.js"></script>
+</body>
+</html>

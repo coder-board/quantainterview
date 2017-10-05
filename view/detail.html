@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>详情页 · Quanta center</title>
+	<link rel="stylesheet" href="../dist/css/detail.min.css">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico"/>
+</head>
+<body>
+<div class="container" v-bind:class="{'opacity': !status.isLoading}">
+	<div class="panel">
+		<div class="panel-nav">
+			<a class="icon-back pull-left" href="javascript:void(0)" v-on:click="back">
+				<span></span>
+			</a>
+			<a class="icon-master pull-right" href="javascript:void(0)" v-text="mainData.master"></a>
+			<h1>面试</h1>
+		</div>
+		<form class="panel-body" action="" method="" v-on:keyup="hasModified" v-on:change="hasModified" v-on:submit.prevent="onSubmit">
+			<section>
+				<dl class="sidebar">
+					<dt><img src="../images/icon-person.png" alt=""></dt>	
+					<dd>个人基本信息</dd>
+				</dl>
+				<div class="content content-head">
+					<div class="row">
+						<div class="form-group form-select">
+							<label for="first_will">面试部门</label>
+							<select id="first_will" v-model="mainData.first_will" required>
+								<option v-for="item in depart" value="{{item.depart_id}}" v-text="item.depart_name"></option>
+							</select>
+						</div>
+						<div class="form-group form-select form-muted pull-right">
+							<label for="second_will">第二意愿</label>
+							<select id="second_will" v-model="mainData.second_will">
+								<option value="0">无</option>
+								<option v-for="item in depart" value="{{item.depart_id}}" v-text="item.depart_name"></option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<label for="name">姓名</label>
+							<input type="text" id="name" v-model="mainData.name" placeholder="" required>
+						</div>
+						<div class="form-group pull-right">
+							<label for="class">班级</label>
+							<input type="text" id="class" v-model="mainData.class" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<label for="tel">手机</label>
+							<input type="tel" id="tel" v-model="mainData.phone" placeholder="" required>
+						</div>
+						<div class="form-group pull-right">
+							<label for="email">邮箱</label>
+							<input type="email" id="email" v-model="mainData.email" placeholder="">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<label for="sex">性别</label>
+							<select id="sex" class="sm-select" v-model="mainData.sex">
+								<option value="2">男</option>
+								<option value="1">女</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="other_depart">是否参加其它社团?</label>
+							<select id="second_will" class="sm-select" v-model="mainData.other_depart">
+								<option value="0">否</option>
+								<option value="1">是</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section>
+				<dl class="sidebar">
+					<dt><img src="../images/icon-clock.png" alt=""></dt>	
+					<dd>一面</dd>
+				</dl>
+				<div class="content">
+					<div class="row">
+						<textarea v-model="mainData.fir_comment" placeholder="描述"></textarea>
+					</div>
+					<div class="row">
+						<div class="form-group form-select pull-left">
+							<label for="fir_grade" class="sr-only">评级</label>
+							<select id="fir_grade" v-model="mainData.fir_grade" required>
+								<option value="">未评分</option>
+								<option value="A">评级：A</option>
+								<option value="B">评级：B</option>
+								<option value="C">评级：C</option>
+							</select>
+						</div>
+						<div class="form-group form-auto pull-right">
+							<span>面试官：</span>
+							<span class="text-primary" v-text="mainData.fir_interviewer"></span>
+						</div>
+						<div class="form-group form-select form-center form-auto">
+							<label for="fir_result">面试结果</label>
+							<select id="fir_result" v-model="mainData.fir_result" required>
+								<option value="1">未通过</option>
+								<option value="2">待定</option>
+								<option value="3">通过</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section>
+				<dl class="sidebar">
+					<dt><img src="../images/icon-clock.png" alt=""></dt>	
+					<dd>二面 / 笔试</dd>
+				</dl>
+				<div class="content">
+					<div class="row">
+						<textarea v-model="mainData.sec_comment" placeholder="描述"></textarea>
+					</div>
+					<div class="row">
+						<div class="form-group form-auto pull-left">
+							<label for="sec_grade">分数</label>
+							<input type="text" v-model="mainData.sec_grade"/>
+						</div>
+						<div class="form-group form-auto pull-right">
+							<span>评卷人：</span>
+							<span class="text-primary" v-text="mainData.sec_interviewer"></span>
+						</div>
+						<div class="form-group form-select form-center form-auto">
+							<label for="sec_result">笔试结果</label>
+							<select id="sec_result" v-model="mainData.sec_result">
+								<option value="1">未通过</option>
+								<option value="2">待定</option>
+								<option value="3">通过</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section>
+				<dl class="sidebar">
+					<dt><img src="../images/icon-clock.png" alt=""></dt>	
+					<dd>三面 / 考察期</dd>
+				</dl>
+				<div class="content">
+					<div class="row">
+						<textarea v-model="thd_comment" placeholder="不作记录" readonly></textarea>
+					</div>
+				</div>
+			</section>
+			<section>
+				<input class="btn-success" type="submit" value="保存" v-bind:class="{'disabled': !status.unSaved}" />
+			</section>
+		</form>
+	</div>
+	<footer>
+		<p>Copyright © 2016-2020 Quanta（量子）信息技术服务中心</p>
+	</footer>
+</div>
+<div class="loading" v-show="status.isLoading"><i></i></div>
+<div class="modal" v-cloak v-show="modal.isModal">
+	<div class="modal-inner buffer">
+		<p v-text="modal.text"></p>
+		<div class="btn-group" v-if="modal.success">
+			<a href="javascript:void(0)" class="btn-primary" v-on:click="back">回到主界面</a>
+			<a href="javascript:void(0)" class="btn-default" v-on:click="offModal">留在此页</a>
+		</div>
+		<div class="btn-group" v-else>
+			<a href="javascript:void(0)" class="btn-info" v-on:click="offModal">确定</a>
+		</div>
+	</div>
+</div>
+<script src="../Lib/vue/vue.min.js"></script>
+<script src="../Lib/vue/vue-resource.min.js"></script>
+<script src="../src/js/detail.js"></script>
+</body>
+</html>

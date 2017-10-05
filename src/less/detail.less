@@ -1,0 +1,169 @@
+@import url('./frame.less');
+.public();
+.util();
+.container {
+	width: 100%;
+	padding: 30px 0;
+	.panel {
+		width: 780px;
+		margin: 0 auto;
+		&-nav {
+			padding: 0 50px;
+			a.icon-back {
+				width: 50px;
+				height: 50px;
+				margin: 25px 0;
+				display: block;
+				position: relative;
+				&:before, &:after, span:before {
+					content: "";
+					width: 20px;
+					height: 3px;
+					top: 50%;
+					left: 10px;
+					background: #41BEFB;
+					position: absolute;
+				}
+				&:before {
+					margin-top: -6px;
+					transform: rotate(-40deg);
+				}
+				&:after {
+					margin-top: 6px;
+					transform: rotate(40deg);
+				}
+				span:before {
+					width: 30px;
+					left: 15px;
+				}
+			}
+			a.icon-master {
+				padding: 0 10px;
+				display: inline-block;
+				border-radius: 4px;
+				height: 50px;
+				border: solid 1px #71CEFA;
+				color: #fff;
+				line-height: 50px;
+				font-size: 16px;
+				margin: 25px 0;
+			}
+		}
+		&-body {
+			.clear();
+			section {
+				.clear();
+				padding: 10px 0;
+				input[type=submit] {
+					display: block;
+					width: 180px;
+					margin: 0 auto;
+				}
+				&:last-child {
+					padding: 0;
+				}
+			}
+			dl.sidebar {
+				width: 15%;
+				color: #35aafa;
+				font-size: 16px;
+				text-align: center;
+				font-weight: bold;
+				float: left;
+				dt > img {
+					margin: 0 auto;
+				}
+			}
+			.content {
+				width: 82%;
+				float: left;
+				padding-left: 3%;
+				.row {
+					.clear();
+					padding: 5px 0;
+				}
+				input, select {
+					height: 32px;
+				}
+				label {
+					margin-right: 5px;
+				}
+				input {
+					width: 82%;
+				}
+				select {
+					min-width: 150px;
+					&.sm-select {
+						width: auto!important;
+						padding: 0 37px;
+						min-width: inherit;
+					}
+				}
+				textarea {
+					display: block;
+					width: 100%;
+					height: 85px;
+					margin: 0 auto;
+					font-size: 16px;
+					padding-top: 10px;
+					padding-bottom: 10px;
+					overflow: hidden;
+					resize: none;
+				}
+				&.content-head .form-group {
+					width: 50%;
+					select {
+						width: 73%;
+					}
+					&.form-select:after {
+						right: 25px;
+					}
+				}
+				.form-group {
+					float: left;
+					color: #176A93;
+					&.form-select:after {
+						top: 12px;
+					}
+					&.form-auto {
+						color: #D8F2FC;
+						padding: 0 10px;
+						border-radius: 4px;
+						background: #42BEF9;
+						label {
+							vertical-align: middle;
+						}
+						input {
+							width: 90px;
+							padding: 0;
+							vertical-align: middle;
+						}
+						span {
+							display: block;
+							float: left;
+							min-width: 40px;
+							line-height: 32px;
+							&.text-primary {
+								color: #fff;
+							}
+						}
+					}
+					&.form-center {
+						width: 148px;
+						float: none;
+						margin: 0 auto;
+						text-indent: 10px;
+						label {
+							line-height: 32px;
+							margin-right: 0;
+						}
+						select {
+							line-height: 22px;
+							min-width: inherit;
+						}
+					}
+				}
+			}
+		}
+	}
+}

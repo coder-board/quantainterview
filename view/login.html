@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录操作 · Quanta Center</title>
+	<link rel="stylesheet" href="../dist/css/login.min.css">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+</head>
+<body>
+<div class="container" v-bind:class="{'opacity': !status.isLoading}">
+	<header>
+		<h3>面试系统</h3>
+	</header>
+	<section>
+		<div class="thumbnail text-error" v-if="hintData.status">
+			<span v-text="hintData.text"></span>
+			<span class="icon-close" v-on:click="offHint"></span>
+		</div>
+		<form action="" method="" v-on:submit.prevent="onSubmit">
+			<div class="profile">
+				<img src="../images/logo.jpg" alt="">
+			</div>
+			<div class="form-group form-select">
+				<label for="org" class="sr-only">社团</label>
+				<select name="org" id="org" v-model="form.org">
+					<option v-for="item in orgList" value="{{item.org_id}}" v-text="item.org_name"></option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="name" class="sr-only">名字</label>
+				<input type="text" id="name" required="" maxlength="16" v-model="form.name" placeholder="名字">
+			</div>
+			<div class="form-group">
+				<label for="pwd" class="sr-only">密码</label>
+				<input type="password" id="pwd" required="" maxlength="16" v-model="form.check" placeholder="密码">
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn-default btn-login" v-if="!status.isSubmit" value="登录">
+				<input type="submit" v-else class="btn-success btn-login disabled" value="loading..." disabled="disabled">
+			</div>
+		</form>
+		<div class="thumbnail text-default">
+			没找到相应社团？<a href="./join.html">注册社团账号</a>
+		</div>
+	</section>
+	<footer>
+		<p>Copyright © 2016-2020 Quanta（量子）信息技术服务中心</p>
+	</footer>
+</div>
+<script src="../Lib/vue/vue.min.js"></script>
+<script src="../Lib/vue/vue-resource.min.js"></script>
+<script src="../src/js/login.js"></script>
+</body>
+</html>
